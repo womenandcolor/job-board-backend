@@ -1,0 +1,28 @@
+version: "3"
+services:
+  # Backend API
+  api:
+    container_name: api
+    build: ./
+    command: yarn dev
+    ports:
+      - 8081:8081
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=womenandcolor
+      - POSTGRES_HOST=db # corresponds to the docker container name "db" through docker links
+    volumes:
+      - .:/app
+    restart: unless-stopped
+  # Database
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - .:/app
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=womenandcolor
