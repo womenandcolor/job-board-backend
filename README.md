@@ -18,6 +18,12 @@ $ yarn install
 $ docker-compose up --build
 ```
 
+Open a separate terminal window to the same directory and run the database migrations. You will have to do this if there are any changes made to the `migrations` folder to ensure you're running the most up to date database schema locally.
+
+```sh
+$ npm run db:migrate
+```
+
 ## Run the app locally
 
 Make sure docker is running on your computer.
@@ -36,11 +42,37 @@ Middleware can be at the application level or at the router level.
 
 We are using a postgres database that is being setup by a docker container. To query our database, we are using [knex](https://knexjs.org/).
 
+### Usage in app
+
 To get or set data in the db, you can `require` the `db` module out of `src/db/index.js` and use it to run database queries.
+
+### Migrations
 
 To add new tables or columns or to alter the db schema in any way, you will have to create a [migration script](https://knexjs.org/#Migrations-CLI). See examples of this in the `migrations` folder.
 
+To create a new migration run:
+
+```sh
+$ npm run db:create-migration -- <migration-name>
+```
+
+This will create a new file inside of the `migrations` directory that looks like `<timestamp>_<migration_name>`. When you create a new migration make sure to check it into source control!
+
+To run the migration to reflect the db changes you've made to your local db run:
+
+```sh
+$ npm run db:migrate
+```
+
+To rollback your migration (you might do this while you're testing whether a migration worked correctly):
+
+```sh
+$ npm run db:rollback
+```
+
 To connect to your local copy of the the db through a postgres client for debugging, download a postgres client (e.g. [Postbird](https://github.com/paxa/postbird)) and enter the following credentials.
+
+See the team Slack channel to import a `.sql` file to seed your db.
 
 ```
 host: localhost
