@@ -1,8 +1,16 @@
 const express = require("express");
 
 const { healthRouter } = require('../routes/health/health.router')
+const { db } = require('../db/index')
 
 const router = express.Router();
 router.use("/health", healthRouter);
+
+router.get("/profiles", (req, res) => {
+    db
+        .select('*')
+        .from('profiles')
+        .then(profiles => res.json(profiles))
+})
 
 module.exports = router;
