@@ -9,8 +9,9 @@ router.use("/health", healthRouter);
 router.get("/profiles", (req, res) => {
     db
         .select('*')
-        .from('profiles')
+        .from('accounts_profile')
         .then(profiles => res.json(profiles))
+        .catch(err => res.json(err))
 })
 
 module.exports = router;

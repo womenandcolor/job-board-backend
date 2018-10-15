@@ -1,6 +1,6 @@
 const knex = require("knex")({
   client: "pg",
-  connection: process.env.DB_CONNECTION_STRING,
+  connection: process.env.HEROKU_POSTGRESQL_BRONZE_URL,
   ssl: true
 });
 
