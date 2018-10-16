@@ -1,6 +1,9 @@
 {
   "name": "bridge-node-starter",
   "version": "0.0.0",
+  "engines": {
+    "node": "8.9.4"
+  },
   "description": "Node server starter",
   "scripts": {
     "start": "node src/index.js",
